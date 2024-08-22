@@ -436,8 +436,8 @@ Blockly.Blocks['forever'] = {
 }
 
 javascriptGenerator.forBlock['forever'] = function(block) {
-  const statements = Blockly.JavaScript.statementToCode(block, 'DO');
-  const code = `while (true) {\n${statements}}\n`;
+  const statements =javascriptGenerator.statementToCode(block, 'DO');
+  const code = `While (true) {${statements} }\n`;
   return code;
 }
 
@@ -458,9 +458,9 @@ Blockly.Blocks['if_then'] = {
 }
 
 javascriptGenerator.forBlock['if_then'] = function(block) {
-  const condition = Blockly.JavaScript.valueToCode(block, 'CONDITION', Blockly.JavaScript.ORDER_NONE) || 'false';
-  const branch = Blockly.JavaScript.statementToCode(block, 'THEN');
-  const code = `if (${condition}) {\n${branch}}\n`;
+  const condition = javascriptGenerator.valueToCode(block, 'CONDITION', javascriptGenerator.ORDER_NONE) || 'false';
+  const branch = javascriptGenerator.statementToCode(block, 'THEN');
+  const code = `If (${condition}) {${branch} }\n`;
   return code;
 }
 
@@ -484,10 +484,10 @@ Blockly.Blocks['if_then_else'] = {
 }
 
 javascriptGenerator.forBlock['if_then_else'] = function(block) {
-  const condition = Blockly.JavaScript.valueToCode(block, 'CONDITION', Blockly.JavaScript.ORDER_NONE) || 'false';
-  const thenBranch = Blockly.JavaScript.statementToCode(block, 'THEN');
-  const elseBranch = Blockly.JavaScript.statementToCode(block, 'ELSE');
-  const code = `if (${condition}) {\n${thenBranch}} else {\n${elseBranch}}\n`;
+  const condition = javascriptGenerator.valueToCode(block, 'CONDITION', javascriptGenerator.ORDER_NONE) || 'false';
+  const thenBranch = javascriptGenerator.statementToCode(block, 'THEN');
+  const elseBranch = javascriptGenerator.statementToCode(block, 'ELSE');
+  const code = `If (${condition}) {${thenBranch} } else {${elseBranch} `;
   return code;
 }
 
@@ -508,9 +508,9 @@ Blockly.Blocks['repeat_until'] = {
 }
 
 javascriptGenerator.forBlock['repeat_until'] = function(block) {
-  const condition = Blockly.JavaScript.valueToCode(block, 'CONDITION', Blockly.JavaScript.ORDER_NONE) || 'false';
-  const statements = Blockly.JavaScript.statementToCode(block, 'DO');
-  const code = `while (!(${condition})) {\n${statements}}\n`;
+  const condition = javascriptGenerator.valueToCode(block, 'CONDITION', javascriptGenerator.ORDER_NONE) || 'false';
+  const statements = javascriptGenerator.statementToCode(block, 'DO');
+  const code = `While (!(${condition})) {${statements}}`;
   return code;
 }
 
@@ -519,7 +519,7 @@ Blockly.Blocks['stop'] = {
     this.appendDummyInput()
       .appendField("Stop")
       .appendField(new Blockly.FieldDropdown([
-        ["all", "ALL"],
+        ["all", "All"],
         ["this script", "THIS_SCRIPT"],
         ["other scripts in sprite", "OTHER_SCRIPTS"]
       ]), "STOP_OPTION");
@@ -533,7 +533,7 @@ Blockly.Blocks['stop'] = {
 
 javascriptGenerator.forBlock['stop'] = function(block) {
   const stopOption = block.getFieldValue('STOP_OPTION');
-  const code = `stop('${stopOption}');\n`;
+  const code = `Stop('${stopOption}')`;
   return code;
 }
 
@@ -550,7 +550,7 @@ Blockly.Blocks['take_photo'] = {
 }
 
 javascriptGenerator.forBlock['take_photo'] = function(block) {
-  const code = `takePhoto();\n`;
+  const code = `Takephoto`;
   return code;
 }
 
@@ -567,7 +567,7 @@ Blockly.Blocks['start_record'] = {
 }
 
 javascriptGenerator.forBlock['start_record'] = function(block) {
-  const code = `startRecording();\n`;
+  const code = `Startrecording`;
   return code;
 }
 
@@ -584,7 +584,7 @@ Blockly.Blocks['stop_record'] = {
 }
 
 javascriptGenerator.forBlock['stop_record'] = function(block) {
-  const code = `stopRecording();\n`;
+  const code = `Stoprecording`;
   return code;
 }
 
@@ -649,29 +649,29 @@ Blockly.Blocks['divide'] = {
 };
 
 javascriptGenerator.forBlock['add'] = function(block) {
-  const a = Blockly.JavaScript.valueToCode(block, 'A', Blockly.JavaScript.ORDER_ADDITION) || '0';
-  const b = Blockly.JavaScript.valueToCode(block, 'B', Blockly.JavaScript.ORDER_ADDITION) || '0';
+  const a = javascriptGenerator.valueToCode(block, 'A', javascriptGenerator.ORDER_ADDITION) || '0';
+  const b = javascriptGenerator.valueToCode(block, 'B', javascriptGenerator.ORDER_ADDITION) || '0';
   const code = `${a} + ${b}`;
   return code;
 };
 
 javascriptGenerator.forBlock['subtract'] = function(block) {
-  const a = Blockly.JavaScript.valueToCode(block, 'A', Blockly.JavaScript.ORDER_SUBTRACTION) || '0';
-  const b = Blockly.JavaScript.valueToCode(block, 'B', Blockly.JavaScript.ORDER_SUBTRACTION) || '0';
+  const a = javascriptGenerator.valueToCode(block, 'A', javascriptGenerator.ORDER_SUBTRACTION) || '0';
+  const b = javascriptGenerator.valueToCode(block, 'B', javascriptGenerator.ORDER_SUBTRACTION) || '0';
   const code = `${a} - ${b}`;
   return code;
 };
 
 javascriptGenerator.forBlock['multiply'] = function(block) {
-  const a = Blockly.JavaScript.valueToCode(block, 'A', Blockly.JavaScript.ORDER_MULTIPLICATION) || '0';
-  const b = Blockly.JavaScript.valueToCode(block, 'B', Blockly.JavaScript.ORDER_MULTIPLICATION) || '0';
+  const a = javascriptGenerator.valueToCode(block, 'A', javascriptGenerator.ORDER_MULTIPLICATION) || '0';
+  const b = javascriptGenerator.valueToCode(block, 'B', javascriptGenerator.ORDER_MULTIPLICATION) || '0';
   const code = `${a} * ${b}`;
   return code;
 };
 
 javascriptGenerator.forBlock['divide'] = function(block) {
-  const a = Blockly.JavaScript.valueToCode(block, 'A', Blockly.JavaScript.ORDER_DIVISION) || '0';
-  const b = Blockly.JavaScript.valueToCode(block, 'B', Blockly.JavaScript.ORDER_DIVISION) || '0';
+  const a = javascriptGenerator.valueToCode(block, 'A', javascriptGenerator.ORDER_DIVISION) || '0';
+  const b = javascriptGenerator.valueToCode(block, 'B', javascriptGenerator.ORDER_DIVISION) || '0';
   const code = `${a} / ${b}`;
   return code;
 };
@@ -693,8 +693,8 @@ Blockly.Blocks['pick_random'] = {
 }
 
 javascriptGenerator.forBlock['pick_random'] = function(block) {
-  const from = Blockly.JavaScript.valueToCode(block, 'FROM', Blockly.JavaScript.ORDER_COMMA) || '0';
-  const to = Blockly.JavaScript.valueToCode(block, 'TO', Blockly.JavaScript.ORDER_COMMA) || '0';
+  const from = javascriptGenerator.valueToCode(block, 'FROM', javascriptGenerator.ORDER_COMMA) || '0';
+  const to = javascriptGenerator.valueToCode(block, 'TO', javascriptGenerator.ORDER_COMMA) || '0';
   const code = `Math.floor(Math.random() * (${to} - ${from} + 1) + ${from})`;
   return code;
 }
@@ -730,15 +730,15 @@ Blockly.Blocks['greater_than'] = {
 };
 
 javascriptGenerator.forBlock['less_than'] = function(block) {
-  const a = Blockly.JavaScript.valueToCode(block, 'A', Blockly.JavaScript.ORDER_RELATIONAL) || '0';
-  const b = Blockly.JavaScript.valueToCode(block, 'B', Blockly.JavaScript.ORDER_RELATIONAL) || '0';
+  const a = javascriptGenerator.valueToCode(block, 'A', javascriptGenerator.ORDER_RELATIONAL) || '0';
+  const b = javascriptGenerator.valueToCode(block, 'B', javascriptGenerator.ORDER_RELATIONAL) || '0';
   const code = `${a} < ${b}`;
   return code;
 };
 
 javascriptGenerator.forBlock['greater_than'] = function(block) {
-  const a = Blockly.JavaScript.valueToCode(block, 'A', Blockly.JavaScript.ORDER_RELATIONAL) || '0';
-  const b = Blockly.JavaScript.valueToCode(block, 'B', Blockly.JavaScript.ORDER_RELATIONAL) || '0';
+  const a = javascriptGenerator.valueToCode(block, 'A', javascriptGenerator.ORDER_RELATIONAL) || '0';
+  const b = javascriptGenerator.valueToCode(block, 'B', javascriptGenerator.ORDER_RELATIONAL) || '0';
   const code = `${a} > ${b}`;
   return code;
 };
@@ -759,8 +759,8 @@ Blockly.Blocks['equals'] = {
 };
 
 javascriptGenerator.forBlock['equals'] = function(block) {
-  const a = Blockly.JavaScript.valueToCode(block, 'A', Blockly.JavaScript.ORDER_EQUALITY) || '0';
-  const b = Blockly.JavaScript.valueToCode(block, 'B', Blockly.JavaScript.ORDER_EQUALITY) || '0';
+  const a = javascriptGenerator.valueToCode(block, 'A', javascriptGenerator.ORDER_EQUALITY) || '0';
+  const b = javascriptGenerator.valueToCode(block, 'B', javascriptGenerator.ORDER_EQUALITY) || '0';
   const code = `${a} === ${b}`;
   return code;
 };
@@ -809,21 +809,21 @@ Blockly.Blocks['not'] = {
 };
 
 javascriptGenerator.forBlock['and'] = function(block) {
-  const a = Blockly.JavaScript.valueToCode(block, 'A', Blockly.JavaScript.ORDER_LOGICAL_AND) || '0';
-  const b = Blockly.JavaScript.valueToCode(block, 'B', Blockly.JavaScript.ORDER_LOGICAL_AND) || '0';
+  const a = javascriptGenerator.valueToCode(block, 'A', javascriptGenerator.ORDER_LOGICAL_AND) || '0';
+  const b = javascriptGenerator.valueToCode(block, 'B', javascriptGenerator.ORDER_LOGICAL_AND) || '0';
   const code = `(${a} !== 0 && ${b} !== 0)`;
   return code;
 };
 
 javascriptGenerator.forBlock['or'] = function(block) {
-  const a = Blockly.JavaScript.valueToCode(block, 'A', Blockly.JavaScript.ORDER_LOGICAL_OR) || '0';
-  const b = Blockly.JavaScript.valueToCode(block, 'B', Blockly.JavaScript.ORDER_LOGICAL_OR) || '0';
+  const a = javascriptGenerator.valueToCode(block, 'A', javascriptGenerator.ORDER_LOGICAL_OR) || '0';
+  const b = javascriptGenerator.valueToCode(block, 'B', javascriptGenerator.ORDER_LOGICAL_OR) || '0';
   const code = `(${a} !== 0 || ${b} !== 0)`;
   return code;
 };
 
 javascriptGenerator.forBlock['not'] = function(block) {
-  const a = Blockly.JavaScript.valueToCode(block, 'A', Blockly.JavaScript.ORDER_LOGICAL_NOT) || '0';
+  const a = javascriptGenerator.valueToCode(block, 'A', javascriptGenerator.ORDER_LOGICAL_NOT) || '0';
   const code = `(${a} === 0)`;
   return code;
 };
@@ -844,8 +844,8 @@ Blockly.Blocks['modulus'] = {
 };
 
 javascriptGenerator.forBlock['modulus'] = function(block) {
-  const a = Blockly.JavaScript.valueToCode(block, 'A', Blockly.JavaScript.ORDER_MODULUS) || '0';
-  const b = Blockly.JavaScript.valueToCode(block, 'B', Blockly.JavaScript.ORDER_MODULUS) || '1'; // To prevent division by zero error
+  const a = javascriptGenerator.valueToCode(block, 'A', javascriptGenerator.ORDER_MODULUS) || '0';
+  const b = javascriptGenerator.valueToCode(block, 'B', javascriptGenerator.ORDER_MODULUS) || '1'; // To prevent division by zero error
   const code = `${a} % ${b}`;
   return code;
 };
@@ -864,7 +864,7 @@ Blockly.Blocks['round'] = {
 };
 
 javascriptGenerator.forBlock['round'] = function(block) {
-  const num = Blockly.JavaScript.valueToCode(block, 'NUM', Blockly.JavaScript.ORDER_FUNCTION_CALL) || '0';
+  const num = javascriptGenerator.valueToCode(block, 'NUM', javascriptGenerator.ORDER_FUNCTION_CALL) || '0';
   const code = `Math.round(${num})`;
   return code;
 };
