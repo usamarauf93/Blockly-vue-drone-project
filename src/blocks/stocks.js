@@ -444,10 +444,8 @@ javascriptGenerator.forBlock['forever'] = function(block) {
 Blockly.Blocks['if_then'] = {
   init: function() {
     this.appendValueInput("CONDITION")
-      .setCheck("Boolean")
       .appendField("if");
     this.appendStatementInput("THEN")
-      .setCheck(null)
       .appendField("then");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -467,13 +465,10 @@ javascriptGenerator.forBlock['if_then'] = function(block) {
 Blockly.Blocks['if_then_else'] = {
   init: function() {
     this.appendValueInput("CONDITION")
-      .setCheck("Boolean")
       .appendField("if");
     this.appendStatementInput("THEN")
-      .setCheck(null)
       .appendField("then");
     this.appendStatementInput("ELSE")
-      .setCheck(null)
       .appendField("else");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -494,10 +489,8 @@ javascriptGenerator.forBlock['if_then_else'] = function(block) {
 Blockly.Blocks['repeat_until'] = {
   init: function() {
     this.appendValueInput("CONDITION")
-      .setCheck("Boolean")
       .appendField("repeat until");
     this.appendStatementInput("DO")
-      .setCheck(null)
       .appendField("do");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -722,6 +715,8 @@ Blockly.Blocks['greater_than'] = {
       .setCheck("Number")
       .appendField(">");
     this.setInputsInline(true);
+    this.setOutput(true, "Boolean");  // Set output to return a Boolean value
+
     this.setOutput(true, "Boolean");
     this.setColour(210);
     this.setTooltip('Returns true if the first number is greater than the second number');
@@ -751,19 +746,21 @@ Blockly.Blocks['equals'] = {
       .setCheck("Number")
       .appendField("=");
     this.setInputsInline(true);
-    this.setOutput(true, "Boolean");
+    this.setOutput(true, "Boolean");  // Set output to return a Boolean value
     this.setColour(210);
     this.setTooltip('Returns true if the first number is equal to the second number');
     this.setHelpUrl('');
   }
 };
 
+
 javascriptGenerator.forBlock['equals'] = function(block) {
   const a = javascriptGenerator.valueToCode(block, 'A', javascriptGenerator.ORDER_EQUALITY) || '0';
   const b = javascriptGenerator.valueToCode(block, 'B', javascriptGenerator.ORDER_EQUALITY) || '0';
-  const code = `${a} === ${b}`;
-  return code;
+  const code = `(${a} === ${b})`;  // Return a Boolean expression as a tuple value
+  return [code, javascriptGenerator.ORDER_EQUALITY];
 };
+
 
 Blockly.Blocks['and'] = {
   init: function() {
